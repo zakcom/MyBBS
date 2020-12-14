@@ -26,7 +26,7 @@
     }
     
     //表示する記事を取得するSQLを準備
-    $select = $database->prepare("SELECT content,user FROM bbs ORDER BY id  DESC LIMIT :start, :max ");
+    $select = $database->prepare("SELECT * FROM bbs ORDER BY id  DESC LIMIT :start, :max ");
     if($now == 1){
         //１ページ目の処理
         $select->bindValue(":start",$now -1,PDO::PARAM_INT);
@@ -47,17 +47,28 @@
         <meta　charset="UTF-8">
         <title>ページネーション</title>
     </head>
-            
     <body>
-                
-    <ul>
-        <?php
-            //各記事のタイトルにリンクを貼って表示
-            foreach ( $data as $row ) {
-            echo "<li>{$row[title]}</li>";
-            }
-        ?>
-    </ul>
+
+         <h2>投稿一覧</h2>
+            <ul class="list-unstyled">
+                 <?php
+                    if($data){
+                        foreach($data as $row){
+                            $user = $row['user'];
+                            $content = $row['content'];
+                            $date = $row['created_at']
+                            
+                ?>
+                           <div class="d-flex justify-content-start">
+                               <li class="media mr-3"><?php print htmlspecialchars($user, ENT_QUOTES, "UTF-8");?></li>
+                               <li class="text-muted"><?php print htmlspecialchars($date)?></li>
+                            </div>
+                               <li class="media border-bottom border-dark mb-3"><?php print htmlspecialchars($content, ENT_QUOTES, "UTF-8");?></li>
+                <?php
+                        }
+                        
+                    }
+                 ?>
          <?php
             //ページネーションを表示
             for ( $n = 1; $n <= $pages; $n ++){

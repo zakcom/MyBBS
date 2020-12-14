@@ -13,14 +13,14 @@
         $statement->null;
     }
     
-    $sql = 'SELECT * FROM bbs ORDER BY created_at DESC';
-    $statement = $database -> query($sql);
+    // $sql = 'SELECT * FROM bbs ORDER BY created_at DESC';
+    // $statement = $database -> query($sql);
     
-    $records = $statement->fetchall();
+    // $records = $statement->fetchall();
     
-    $statement = null;
+    // $statement = null;
     
-    $database = null;
+    // $database = null;
 ?>
 
 
@@ -35,37 +35,12 @@
     </head>
     
     <body>
-        <?php
-        //  <!--本番では削除-->
-        // print '<div style="backgroundcolor: skyblue;">';
-        // print '<p>動作確認用</p>';
-        // print_r($_POST);
-        // print '</div>';
-        ?>
         <!--一覧表示機能-->
     <div class="container">
         <h1><a href="MyBBS.php">MyBBS</a></h1>
         <div>
-            <h2>投稿一覧</h2>
-            <ul class="list-unstyled">
-                 <?php
-                    if($records){
-                        foreach($records as $record){
-                            $user = $record['user'];
-                            $content = $record['content'];
-                            $date = $record['created_at']
-                            
-                ?>
-                           <div class="d-flex justify-content-start">
-                               <li class="media mr-3"><?php print htmlspecialchars($user, ENT_QUOTES, "UTF-8");?></li>
-                               <li class="text-muted"><?php print htmlspecialchars($date)?></li>
-                            </div>
-                               <li class="media border-bottom border-dark mb-3"><?php print htmlspecialchars($content, ENT_QUOTES, "UTF-8");?></li>
-                <?php
-                        }
-                        
-                    }
-                 ?>
+                 
+                 <?php require_once('page.php'); ?>
               
                 
             </ul>
